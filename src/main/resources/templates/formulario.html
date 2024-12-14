@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Trabajador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="${trabajador.id != null ? 'Editar Trabajador' : 'Nuevo Trabajador'}"></h1>
+    <form th:action="@{/trabajadores}" th:object="${trabajador}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required /><br/>
+        <label>Apellido Paterno:</label>
+        <input type="text" th:field="*{apellidoPaterno}" required /><br/>
+        <label>Apellido Materno:</label>
+        <input type="text" th:field="*{apellidoMaterno}" required /><br/>
+        <label>Número de Documento:</label>
+        <input type="text" th:field="*{numeroDocumento}" required /><br/>
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" th:field="*{fechaNacimiento}" required /><br/>
+        <label>Dirección:</label>
+        <input type="text" th:field="*{direccion}" /><br/>
+        <label>Meses Trabajados:</label>
+        <input type="number" th:field="*{mesesTrabajados}" min="0" required /><br/>
+        <label>Tipo de Seguro:</label>
+        <select th:field="*{tipoSeguro}" required>
+            <option value="ESSALUD">ESSALUD</option>
+            <option value="EPS">EPS</option>
+        </select><br/>
+        <label>Sueldo:</label>
+        <input type="number" th:field="*{sueldo}" step="0.01" required /><br/>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>
